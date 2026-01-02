@@ -1,16 +1,15 @@
 """
 HTTP Server Shell
 Author: Guy Carmeli
-Purpose: Provide a basis for Ex. 4
-Note: The code is written in a simple way, without classes,
-log files or other utilities, for educational purpose
-Usage: Fill the missing functions and constants
+Purpose: creates a localhost site http, with pictures  and moving java things
 27/12/25
 """
+
 
 import os
 import socket
 import logging
+
 
 QUEUE_SIZE = 10
 IP = '0.0.0.0'
@@ -44,7 +43,7 @@ def get_file_data(file_name):
     """
     Get data from file
     :param file_name: the name of the file
-    :return: the file data in a string
+    :return: its data in a string
     """
     if not os.path.isfile(file_name):
         logging.error("File not found")
@@ -86,7 +85,7 @@ def handle_client_request(resource, client_socket):
         )
         return
 
-    filename = os.path.join(WEBROOT, uri.lstrip('/').replace('/', os.sep))
+    filename = os.path.join(WEBROOT, uri.lstrip('/'))
 
     if '.' in uri:
         file_type = uri.split('.')[-1].lower()
@@ -130,7 +129,7 @@ def validate_http_request(request):
    Check if request is a valid HTTP request and returns TRUE / FALSE and
     the requested URL
     :param request: the request which was received from the client
-    :return: a tuple of (True/False - depending if the request is valid,
+    :return: a tuple of (True/False - dependiing if the request is valid,
     the requested resource )
     """
     try:
